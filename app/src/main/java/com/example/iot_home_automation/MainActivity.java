@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loginUser() {
+        //test
     }
 
     private void registerUser() {
