@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case(R.id.btnLogin): login();break;
-            case(R.id.btnRegister): register();break;
+            case(R.id.btnLogin): loginUser();break;
+            case(R.id.btnRegister): registerUser();break;
             
         }
             
@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void login() {
+    private void loginUser() {
+        //test
     }
 
-    private void register() {
+    private void registerUser() {
     }
 }
