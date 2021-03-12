@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edPassword=(EditText)findViewById(R.id.edPassword);
 
         //btn on click
-        btnLogin.setOnClickListener((View.OnClickListener) this);
+        btnLogin.setOnClickListener(this);
+        usersDatabase= FirebaseDatabase.getInstance().getReference("users");
     }
 
     @Override
@@ -50,19 +52,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
             String email = edEmail.getText().toString();
             String password = edPassword.getText().toString();
-            if(email != null && password != null){
-                usersDatabase.orderByChild("email").equalTo(email);
+            if (TextUtils.isEmpty(email)){
+                Toast.makeText(this,"Email ID cannot be empty",Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if(TextUtils.isEmpty(password)){
+                Toast.makeText(this,"Password cannot be empty",Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if(!TextUtils.isEmpty(password) && !TextUtils.isEmpty(email)){
+                usersChild=FirebaseDatabase.getInstance().getReference().child("users").child(email);
                 if(usersChild!= null){
                     usersChild.addValueEventListener(this);
                 }else{
                     Toast.makeText(this,"User with Email ID :" +  email + " Does not exists.",Toast.LENGTH_LONG).show();
                 }
-            }
-            if (email == null){
-                Toast.makeText(this,"Email ID cannot be empty",Toast.LENGTH_LONG).show();
-            }
-            if(password == null){
-                Toast.makeText(this,"Password cannot be empty",Toast.LENGTH_LONG).show();
             }
 
         }catch (Exception e){
@@ -75,10 +81,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(snapshot.exists()){
             String password = edPassword.getText().toString();
             String pass=snapshot.child("password").getValue().toString();
-            if(password == pass){
-
+            if(TextUtils.equals(pass, password)){
                 Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
-
             }else{
             Toast.makeText(this,"The data do not exist",Toast.LENGTH_LONG);
             }
