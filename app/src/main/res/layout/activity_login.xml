@@ -10,16 +10,27 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-
-    <TextView
-        android:id="@+id/textView"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/black"
         android:gravity="center"
-        android:text="Home Automation"
-        android:layout_marginBottom="16dp"
+        >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@color/white"
+        app:title="SMART HOME LOGIN"
         android:textSize="38sp"
-        android:textColor="#E4DAEC"/>
+        android:foregroundGravity="center"
+        />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <EditText
         android:id="@+id/edEmail"
@@ -29,7 +40,7 @@
         android:layout_marginBottom="16dp"
         android:inputType="textEmailAddress"
         android:imeOptions="actionDone"
-        android:hint="Sign In with Email"
+        android:hint="Enter Email ID"
         android:textSize="22sp"
     />
 
@@ -50,19 +61,6 @@
         android:background="@drawable/button_background"
         android:textAllCaps="false"
         android:textSize="25sp"
-        android:text="Sign In" />
-
-
-
-    <Button
-        android:id="@+id/btnForgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:text="Return"
-        />
-    />
+        android:text="Login" />
 
 </LinearLayout>
