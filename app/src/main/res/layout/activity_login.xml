@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Home Atumation"
+        android:text="Home Automation"
         android:layout_marginBottom="16dp"
         android:textSize="38sp"
         android:textColor="#E4DAEC"/>
