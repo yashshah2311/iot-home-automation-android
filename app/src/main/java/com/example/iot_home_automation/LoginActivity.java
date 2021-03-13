@@ -3,6 +3,7 @@ package com.example.iot_home_automation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String email = edEmail.getText().toString();
             String password = edPassword.getText().toString();
             if (TextUtils.isEmpty(email)){
-                Toast.makeText(this,"Email ID cannot be empty",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Username cannot be empty",Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(usersChild!= null){
                     usersChild.addValueEventListener(this);
                 }else{
-                    Toast.makeText(this,"User with Email ID :" +  email + " Does not exists.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(this,"User with Username :" +  email + " Does not exists.",Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -83,8 +84,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String pass=snapshot.child("password").getValue().toString();
             if(TextUtils.equals(pass, password)){
                 Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                startActivity(intent);
             }else{
-            Toast.makeText(this,"The data do not exist",Toast.LENGTH_LONG);
+            Toast.makeText(this,"Please Login with Valid Username/Password",Toast.LENGTH_LONG);
             }
         }
     }
