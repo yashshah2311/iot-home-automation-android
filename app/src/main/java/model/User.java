@@ -4,32 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private int id;
+    private String userName;
     private String firstName;
     private String lastName;
-    private String email;
     private String password;
-    public List<Device> devices = new ArrayList();
+    private List<Device> devices = new ArrayList();
 
     public User() {
-
     }
 
-    public User(int id, String firstName, String lastName, String email, String password, List<Device> devices) {
-        this.id = id;
+    public User(String userName, String firstName, String lastName, String password) {
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.password = password;
-        this.devices = devices;
     }
 
-    public int getId() {
-        return id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -46,14 +42,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -74,13 +62,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
+        return "Users{" +
+                "userName='" + userName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", devices=" + devices +
+                ", devicesList=" + devices +
                 '}';
     }
 }
