@@ -3,11 +3,14 @@ package com.example.iot_home_automation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,15 +24,22 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AddDeviceActivity extends AppCompatActivity {
+import model.Device;
+import model.User;
+
+public class AddDeviceActivity extends AppCompatActivity implements View.OnClickListener{
 
     ValueEventListener listener;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
     Button btnAdd;
+    RadioGroup rgButton;
+    RadioButton rbOn, rbOff;
+
+    long id = 0;
+    String actualValue = "", defaultValue = "OFF";
 
     DatabaseReference devices;
-    DatabaseReference deviceLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,23 @@ public class AddDeviceActivity extends AppCompatActivity {
                 insertData();
             }
         });
+
+        devices = FirebaseDatabase.getInstance().getReference().child("users").child("shruti").child("devicesList");
+
+        devices.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                    id=(snapshot.getChildrenCount());
+                Toast.makeText(AddDeviceActivity.this, "Device is added" + id, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void fetchData()
@@ -75,16 +102,48 @@ public class AddDeviceActivity extends AppCompatActivity {
 
     public void insertData()
     {
-        //to insert data in firebase users table
-        deviceLists = FirebaseDatabase.getInstance().getReference().child("users").child("yash_9999").child("devicesList").child("2");
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
         String spinnerText = spinner.getSelectedItem().toString();
-        deviceLists.push().setValue(spinnerText)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(), "Device Added", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+        //to insert data in firebase users table
+        devices = FirebaseDatabase.getInstance().getReference().child("users").child("shruti").child("devicesList");
+
+        devices.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Spinner spinner = (Spinner)findViewById(R.id.spinner);
+                String spinnerText = spinner.getSelectedItem().toString();
+
+                    Device device = new Device(spinnerText, defaultValue, actualValue);
+                    devices.child(String.valueOf(id)).setValue(device);
+                    Toast.makeText(AddDeviceActivity.this, "Device is added", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(AddDeviceActivity.this,HomeActivity.class);
+                    startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        rgButton = (RadioGroup)findViewById(R.id.rgButton);
+        rgButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int id = rgButton.getCheckedRadioButtonId();
+                switch(id) {
+                    case R.id.rbOn:
+                        actualValue = "ON";
+                        break;
+                    case R.id.rbOff:
+                        actualValue = "OFF";
+                        break;
+                }
+            }
+        });
     }
 }
