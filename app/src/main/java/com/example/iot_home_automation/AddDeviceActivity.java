@@ -34,7 +34,7 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
     ArrayAdapter<String> adapter;
     Button btnAdd;
     RadioGroup rgButton;
-    RadioButton rbOn, rbOff;
+    RadioButton rb;
 
     long id = 0;
     String actualValue = "", defaultValue = "OFF";
@@ -54,7 +54,8 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
         mySpinner.setAdapter(adapter);
 
         fetchData();
-
+        rgButton=(RadioGroup)findViewById(R.id.rgButton);
+        rgButton.setOnClickListener(this);
         btnAdd = (Button)findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,13 +136,9 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int id = rgButton.getCheckedRadioButtonId();
-                switch(id) {
-                    case R.id.rbOn:
-                        actualValue = "ON";
-                        break;
-                    case R.id.rbOff:
-                        actualValue = "OFF";
-                        break;
+                if (id != -1) {
+                    rb = findViewById(id);
+                    actualValue = rb.getText().toString();
                 }
             }
         });
