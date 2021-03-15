@@ -82,9 +82,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(snapshot.exists()){
             String password = edPassword.getText().toString();
             String pass=snapshot.child("password").getValue().toString();
+            String username = snapshot.child("userName").getValue().toString();
+
             if(TextUtils.equals(pass, password)){
                 Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                intent.putExtra("user", username);
                 startActivity(intent);
             }else{
             Toast.makeText(this,"Please Login with Valid Username/Password",Toast.LENGTH_LONG);
