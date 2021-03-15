@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout lin1, lin2;
     ImageView btnAdd;
     String username;
-    DatabaseReference  usersTable, devicesTable, userDevice;
+    DatabaseReference  usersTable, userDevice;
 
     List<Device> devices;
     @Override
@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lin2 = findViewById(R.id.lin2);
 
         usersTable = FirebaseDatabase.getInstance().getReference("users");
-        devicesTable = FirebaseDatabase.getInstance().getReference("devices");
 
         devices = new ArrayList<Device>();
 
@@ -65,14 +64,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-//        if(id != R.id.btnAdd){
-//            //addButton();
-//
-//        }
-//        else{
-//            v.setVisibility(v.GONE);
-//        }
+        int drawableId = (Integer)v.getTag();
+        switch(drawableId){
+            case R.drawable.lightbulb:
+                Toast.makeText(this, "The light bulb was called successfully", Toast.LENGTH_LONG).show();
+                break;
+            case R.drawable.tv:
+                Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
+                break;
+            case R.drawable.ac:
+                Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
+                break;
+            case R.drawable.add:
+                Toast.makeText(this, "The add button was called successfully", Toast.LENGTH_LONG).show();
 
+                break;
+        }
 
     }
 
@@ -135,18 +142,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch(deviceName){
             case "Bulb":
                 im.setImageResource(R.drawable.lightbulb);
+                im.setTag(R.drawable.lightbulb);
                 break;
             case "TV":
                 im.setImageResource(R.drawable.tv);
+                im.setTag(R.drawable.tv);
                 break;
             case "Fridge":
                 //im.setImageResource(R.drawable.lightbulb);
+                //im.setTag(R.drawable.lightbulb);
                 break;
             case "AC":
                 im.setImageResource(R.drawable.ac);
+                im.setTag(R.drawable.ac);
                 break;
             case "Soil Moisture":
                 //im.setImageResource(R.drawable.lightbulb);
+                //im.setTag(R.drawable.lightbulb);
                 break;
         }
         //Toast.makeText(this, myDevice.getActualValue(), Toast.LENGTH_LONG).show();
@@ -181,6 +193,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         im.setLayoutParams(params);
         im.setPadding(15, 15, 15, 15);
         im.setImageResource(R.drawable.add);
+        im.setOnClickListener(this);
+        im.setTag(R.drawable.add);
         btnAdd = im;
         lin2.addView(im);
     }
