@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -27,7 +26,7 @@ import model.Device;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener, ChildEventListener {
 
     LinearLayout lin1, lin2;
-    ImageView btnAdd, btnLight, btnAir, btnTv;
+    ImageView btnAdd;
     String username;
     DatabaseReference  usersTable, devicesTable, userDevice;
 
@@ -54,9 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         devices = new ArrayList<Device>();
 
         findDevices();
-        if(devices.size() <=3){
-            addPlusButton();
-        }
+        addPlusButton();
 
 
 
@@ -162,7 +159,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         im.setOnClickListener(this);
-        if(devices.size() < 4){
+        if(devices.size() <= 4){
+            if(devices.size() == 4){
+                btnAdd.setVisibility(View.GONE);
+            }
             if(lin1.getChildCount() == 2){
                 lin2.addView(im);
             }
@@ -175,13 +175,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void addPlusButton(){
         ImageView im = new ImageView(HomeActivity.this);
-
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(160,160);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(160,160);
         params.setMargins(5,0,5,0);
         im.setScaleType(ImageView.ScaleType.FIT_XY);
         im.setLayoutParams(params);
         im.setPadding(15, 15, 15, 15);
         im.setImageResource(R.drawable.add);
+        btnAdd = im;
         lin2.addView(im);
     }
 }
