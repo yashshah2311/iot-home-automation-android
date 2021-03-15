@@ -54,9 +54,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         devices = new ArrayList<Device>();
 
         findDevices();
-        if(lin2.getChildCount() <=1){
+        if(devices.size() <=3){
             addPlusButton();
         }
+
 
 
 
