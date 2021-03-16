@@ -75,6 +75,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.drawable.ac:
                 Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
                 break;
+            case R.drawable.fridge:
+                Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
+                break;
+            case R.drawable.soil_moisture:
+                Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
+                break;
             case R.drawable.add:
                 Toast.makeText(this, "The add button was called successfully", Toast.LENGTH_LONG).show();
 
@@ -149,19 +155,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 im.setTag(R.drawable.tv);
                 break;
             case "Fridge":
-                //im.setImageResource(R.drawable.lightbulb);
-                //im.setTag(R.drawable.lightbulb);
+                im.setImageResource(R.drawable.fridge);
+                im.setTag(R.drawable.fridge);
                 break;
             case "AC":
                 im.setImageResource(R.drawable.ac);
                 im.setTag(R.drawable.ac);
                 break;
             case "Soil Moisture":
-                //im.setImageResource(R.drawable.lightbulb);
-                //im.setTag(R.drawable.lightbulb);
+                im.setImageResource(R.drawable.soil_moisture);
+                im.setTag(R.drawable.soil_moisture);
                 break;
         }
-        //Toast.makeText(this, myDevice.getActualValue(), Toast.LENGTH_LONG).show();
 
         if(myDevice.getActualValue().equals("ON")){
             im.setBackgroundResource(R.drawable.image_selector_on);
