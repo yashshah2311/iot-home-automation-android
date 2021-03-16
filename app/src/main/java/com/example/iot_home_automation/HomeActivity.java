@@ -70,7 +70,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
                 intent.putExtra("user", username);
                 startActivity(intent);
-//                Toast.makeText(this, "The light bulb was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.tv:
                 Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
@@ -85,7 +84,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.add:
-//                Toast.makeText(this, "The add button was called successfully", Toast.LENGTH_LONG).show();
                 Intent intentAdd=new Intent(HomeActivity.this,AddDeviceActivity.class);
                 intentAdd.putExtra("user", username);
                 startActivity(intentAdd);
