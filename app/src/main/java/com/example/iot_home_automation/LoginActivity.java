@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.iot_home_automation.ui.home.HomeFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -86,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             if(TextUtils.equals(pass, password)){
                 Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                Intent intent=new Intent(LoginActivity.this, NewMainActivity.class);
                 intent.putExtra("user", username);
                 startActivity(intent);
             }else{

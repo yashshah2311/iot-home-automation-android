@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddDeviceActivity"></activity>
+        <activity
+            android:name=".NewMainActivity"
+            android:label="@string/title_activity_new_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".AddDeviceActivity" />
         <activity android:name=".LightBulbActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterActivity" />

@@ -7,7 +7,12 @@
     tools:context=".MainActivity"
     android:background="@drawable/wall">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,6 +21,7 @@
         android:background="@color/black"
         android:gravity="center"
         >
+
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/main_toolbar"
@@ -27,29 +33,29 @@
             android:foregroundGravity="center"
             />
 
-<!--        <TextView-->
-<!--            android:id="@+id/textView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Home Automation"-->
-<!--            android:textSize="38sp"-->
-<!--            android:textColor="#E4DAEC"/>-->
+&lt;!&ndash;        <TextView&ndash;&gt;
+&lt;!&ndash;            android:id="@+id/textView"&ndash;&gt;
+&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;
+&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;
+&lt;!&ndash;            android:gravity="center"&ndash;&gt;
+&lt;!&ndash;            android:text="Home Automation"&ndash;&gt;
+&lt;!&ndash;            android:textSize="38sp"&ndash;&gt;
+&lt;!&ndash;            android:textColor="#E4DAEC"/>&ndash;&gt;
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
 
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintBottom_toBottomOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_launcher_round"
+        tools:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
         android:id="@+id/btnLogin"
