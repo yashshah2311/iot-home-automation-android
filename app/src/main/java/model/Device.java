@@ -1,7 +1,7 @@
 package model;
 
 public class Device {
-    private int index;
+//    private int index;
     private String deviceName;
     private String defaultValue;
     private String actualValue;
@@ -9,20 +9,26 @@ public class Device {
     public Device() {
     }
 
-    public Device(int index, String deviceName, String defaultValue, String actualValue) {
-        this.index = index;
+//    public Device(int index, String deviceName, String defaultValue, String actualValue) {
+//        this.index = index;
+//        this.deviceName = deviceName;
+//        this.defaultValue = defaultValue;
+//        this.actualValue = actualValue;
+//    }
+
+    public Device(String deviceName, String defaultValue, String actualValue) {
         this.deviceName = deviceName;
         this.defaultValue = defaultValue;
         this.actualValue = actualValue;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
+//    public int getIndex() {
+//        return index;
+//    }
+//
+//    public void setIndex(int index) {
+//        this.index = index;
+//    }
 
     public String getDeviceName() {
         return deviceName;
@@ -51,8 +57,7 @@ public class Device {
     @Override
     public String toString() {
         return "Device{" +
-                "index=" + index +
-                ", deviceName='" + deviceName + '\'' +
+                " deviceName='" + deviceName + '\'' +
                 ", defaultValue='" + defaultValue + '\'' +
                 ", actualValue='" + actualValue + '\'' +
                 '}';

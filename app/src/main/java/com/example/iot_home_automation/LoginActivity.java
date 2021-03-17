@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String username = snapshot.child("userName").getValue().toString();
 
             if(TextUtils.equals(pass, password)){
-                Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
+//                Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                 intent.putExtra("user", username);
                 startActivity(intent);

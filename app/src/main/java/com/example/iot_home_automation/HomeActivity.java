@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int drawableId = (Integer)v.getTag();
         switch(drawableId){
             case R.drawable.lightbulb:
+                Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
                 intent.putExtra("user", username);
                 startActivity(intent);
