@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import model.Device;
 import model.User;
 
-public class AddDeviceActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddDeviceActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener{
 
     ValueEventListener listener;
     ArrayList<String> list;
@@ -35,8 +35,8 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
     Button btnAdd;
     RadioGroup rgButton;
     RadioButton rb;
-    String username;
-    long id = 0;
+    String username,spinnerText;
+    long id;
     String actualValue = "", defaultValue = "OFF";
 
     DatabaseReference devices, users;
@@ -49,7 +49,9 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
         username = intent.getStringExtra("user");
         //to fetch device list in the spinner dropdown
         devices = FirebaseDatabase.getInstance().getReference("devices");
-        users = FirebaseDatabase.getInstance().getReference("users").child(username);
+        users = FirebaseDatabase.getInstance().getReference().child("users").child(username).child("devicesList");
+
+        users.addValueEventListener(this);
         fetchData();
         rgButton=(RadioGroup)findViewById(R.id.rgButton);
         rgButton.setOnClickListener(this);
@@ -74,6 +76,7 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
                     list.add(mydata.getValue().toString());
                 }
                 adapter.notifyDataSetChanged();
+                return;
             }
 
             @Override
@@ -88,62 +91,37 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
     {
 
         //to insert data in firebase users table
-        users = FirebaseDatabase.getInstance().getReference().child("users").child(username).child("devicesList");
-
-        users.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Spinner spinner = (Spinner)findViewById(R.id.spinner);
-                String spinnerText = spinner.getSelectedItem().toString();
-                getNewID();
-                int btnId = rgButton.getCheckedRadioButtonId();
-                if (btnId != -1) {
-                    rb = findViewById(btnId);
-                    actualValue = rb.getText().toString();
-                    if(actualValue.equalsIgnoreCase("On")){
-                        actualValue = "ON";
-                    }else {
-                        actualValue = "OFF";
-                    }
-                    Toast.makeText(AddDeviceActivity.this, "Device Actual value " + actualValue, Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(AddDeviceActivity.this, "Device Actual value not selected" + actualValue, Toast.LENGTH_SHORT).show();
-                }
-                Device device = new Device(spinnerText, defaultValue, actualValue);
-                users.child(String.valueOf(id + 1)).setValue(device);
-                Toast.makeText(AddDeviceActivity.this, "Device added successfully", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(AddDeviceActivity.this,HomeActivity.class);
-                intent.putExtra("user", username);
-                startActivity(intent);
-                return;
+        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        spinnerText = spinner.getSelectedItem().toString();
+        int btnId = rgButton.getCheckedRadioButtonId();
+        if (btnId != -1) {
+            rb = findViewById(btnId);
+            actualValue = rb.getText().toString();
+            if(actualValue.equalsIgnoreCase("On")){
+                actualValue = "ON";
+            }else{
+                actualValue = "OFF";
             }
+        }
+        Device device = new Device(spinnerText, defaultValue, actualValue);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if(id < 4){
+            users.child(String.valueOf(id)).setValue(device);
+            Toast.makeText(AddDeviceActivity.this, "Device added successfully", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(AddDeviceActivity.this,HomeActivity.class);
+//            intent.putExtra("user", username);
+            startActivity(intent);
+        }
     }
 
-    public void getNewID(){
-        users = FirebaseDatabase.getInstance().getReference().child("users").child(username).child("devicesList");
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+            id=(snapshot.getChildrenCount());
+    }
 
-        users.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    id=(snapshot.getChildrenCount());
-                    Toast.makeText(AddDeviceActivity.this, "Device is added" + id, Toast.LENGTH_SHORT).show();
-                }else {
-                    id = -1;
-                }
-            }
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     @Override
@@ -154,15 +132,5 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
                 insertData();
                 break;
         }
-    }
-
-    void radioButton(){
-        rgButton = (RadioGroup)findViewById(R.id.rgButton);
-        rgButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-            }
-        });
     }
 }
