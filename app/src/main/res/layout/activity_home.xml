@@ -27,7 +27,7 @@
             android:layout_height="?attr/actionBarSize"
             android:foregroundGravity="center"
             android:textSize="38sp"
-            app:title="SMART HOME LOGIN"
+            app:title="WELCOME SMART HOME"
             app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
