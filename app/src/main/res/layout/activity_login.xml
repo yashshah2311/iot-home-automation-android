@@ -20,15 +20,14 @@
         android:gravity="center"
         >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/main_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize"
-        app:titleTextColor="@color/white"
-        app:title="SMART HOME LOGIN"
-        android:textSize="38sp"
-        android:foregroundGravity="center"
-        />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:foregroundGravity="center"
+            android:textSize="38sp"
+            app:title="SMART HOME LOGIN"
+            app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
