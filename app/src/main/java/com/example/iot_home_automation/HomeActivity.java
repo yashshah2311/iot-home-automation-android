@@ -3,12 +3,16 @@ package com.example.iot_home_automation;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -23,12 +27,15 @@ import java.util.List;
 
 import model.Device;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener, ChildEventListener {
-
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener, ChildEventListener, AdapterView.OnItemClickListener {
+    ListView lvMenu;
+    ArrayList<String> listOfMenu;
+    ArrayAdapter<String> menuAdapter;
     LinearLayout lin1, lin2;
     ImageView btnAdd;
     String username;
     DatabaseReference  usersTable, userDevice;
+    DrawerLayout drawerLayout;
 
     List<Device> devices;
     @Override
@@ -39,7 +46,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initialize() {
-
+        lvMenu = findViewById(R.id.lvMenu);
+        lvMenu.setOnItemClickListener(this);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        listOfMenu = new ArrayList<String>();
+        listOfMenu.add("Home");
+        listOfMenu.add("Logout");
+        menuAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listOfMenu);
+        lvMenu.setAdapter(menuAdapter);
         Intent intent = getIntent();
         username = intent.getStringExtra("user");
 
@@ -206,5 +220,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         im.setTag(R.drawable.add);
         btnAdd = im;
         lin2.addView(im);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+        drawerLayout.closeDrawer(lvMenu);
+        String menu = listOfMenu.get(i);
+        switch(menu){
+            case "Home":
+                Intent intent=new Intent(HomeActivity.this,HomeActivity.class);
+                intent.putExtra("user", username);
+                startActivity(intent);
+                break;
+            case "Logout":
+                Intent intent1=new Intent(HomeActivity.this,LoginActivity.class);
+                startActivity(intent1);
+                break;
+        }
     }
 }
