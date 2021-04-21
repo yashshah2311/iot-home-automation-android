@@ -237,6 +237,5 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent1);
                 break;
         }
-        Toast.makeText(this, "The Bulb was called successfully" + listOfMenu.get(i), Toast.LENGTH_LONG).show();
     }
 }
