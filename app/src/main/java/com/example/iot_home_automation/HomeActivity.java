@@ -103,7 +103,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.drawable.ac:
                     deviceKey = acKey;
-
                     Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
                     intent=new Intent(HomeActivity.this,ACActivity.class);
                     intent.putExtra("user", username);
