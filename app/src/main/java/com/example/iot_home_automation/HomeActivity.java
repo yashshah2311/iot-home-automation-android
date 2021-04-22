@@ -29,7 +29,7 @@ import java.util.List;
 
 import model.Device;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, ChildEventListener, AdapterView.OnItemClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener, ChildEventListener, AdapterView.OnItemClickListener {
     ListView lvMenu;
     ArrayList<String> listOfMenu;
     ArrayAdapter<String> menuAdapter;
@@ -65,7 +65,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         username = intent.getStringExtra("user");
 
 
-
         lin1 = findViewById(R.id.lin1);
         lin2 = findViewById(R.id.lin2);
 
@@ -88,12 +87,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 layout.removeView(btnConnect);
             findDevices();
             addPlusButton();
-
         }
         else{
             int drawableId = (Integer)v.getTag();
             Intent intent;
-
             switch(drawableId){
                 case R.drawable.lightbulb:
                     deviceKey = bulbKey;
@@ -107,8 +104,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     break;
                 case R.drawable.tv:
+                    deviceKey = tvKey;
                     deviceActualValue = tvValue;
                     Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
+                    intent=new Intent(HomeActivity.this,TvActivity.class);
+                    intent.putExtra("user", username);
+                    intent.putExtra("deviceKey", deviceKey);
+                    startActivity(intent);
                     break;
                 case R.drawable.ac:
                     deviceKey = acKey;
@@ -122,7 +124,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.drawable.fridge:
                     deviceActualValue = fridgeValue;
+                    deviceKey = fridgeKey;
                     Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
+                    intent=new Intent(HomeActivity.this,FridgeActivity.class);
+                    intent.putExtra("user", username);
+                    intent.putExtra("deviceKey", deviceKey);
+                    startActivity(intent);
                     break;
                 case R.drawable.soil_moisture:
                     deviceKey = soilKey;
@@ -140,62 +147,52 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intentAdd);
                     break;
             }
-
         }
 
-    }
-
-    private void closeChildListner() {
-        userDevice.removeEventListener(this);
     }
 
     private void findDevices() {
         //usersTable.addChildEventListener(this);
         userDevice = usersTable.child(username).child("devicesList");
         userDevice.addChildEventListener(this);
-
-
     }
 
     @Override
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
         Device device = snapshot.getValue(Device.class);
         devices.add(device);
         addButton(device);
     }
 
     @Override
-    public void onChildChanged(DataSnapshot snapshot, @Nullable String previousChildName){
-        Toast.makeText(this, "DBChanged", Toast.LENGTH_LONG).show();
+    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
     }
 
     @Override
     public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-        Toast.makeText(this, "DBRemoved", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-        Toast.makeText(this, "DBMoved", Toast.LENGTH_LONG).show();
+
     }
 
-//    @Override
-//    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//
-//
-//        if(snapshot.exists()){
-//            String test = snapshot.child("actualValue").getValue().toString();
-//            Toast.makeText(this, test, Toast.LENGTH_LONG).show();
-//        }
-//        else{
-//            Toast.makeText(this, "Couldn't find", Toast.LENGTH_LONG).show();
-//        }
-//    }
-//
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(snapshot.exists()){
+            String test = snapshot.child("actualValue").getValue().toString();
+            Toast.makeText(this, test, Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this, "Couldn't find", Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     public void onCancelled(@NonNull DatabaseError error) {
-        Toast.makeText(this, "DBCanceled", Toast.LENGTH_LONG).show();
 
     }
 
@@ -262,7 +259,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 lin1.addView(im);
             }
         }
-
 
 
     }
