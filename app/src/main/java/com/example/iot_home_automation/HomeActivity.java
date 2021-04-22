@@ -65,10 +65,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         int drawableId = (Integer)v.getTag();
+        Intent intent;
         switch(drawableId){
             case R.drawable.lightbulb:
                 Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
+                intent=new Intent(HomeActivity.this,LightBulbActivity.class);
                 intent.putExtra("user", username);
                 startActivity(intent);
                 break;
@@ -77,12 +78,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.drawable.ac:
                 Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
+                intent=new Intent(HomeActivity.this,ACActivity.class);
+                intent.putExtra("user", username);
+                startActivity(intent);
                 break;
             case R.drawable.fridge:
                 Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.soil_moisture:
                 Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
+                intent=new Intent(HomeActivity.this,SoilMoistureActivity.class);
+                intent.putExtra("user", username);
+                startActivity(intent);
                 break;
             case R.drawable.add:
                 Intent intentAdd=new Intent(HomeActivity.this,AddDeviceActivity.class);
@@ -207,4 +214,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnAdd = im;
         lin2.addView(im);
     }
+
+
 }
