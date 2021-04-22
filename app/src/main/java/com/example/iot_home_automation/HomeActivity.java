@@ -39,8 +39,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     Button btnConnect;
     DatabaseReference  usersTable, userDevice;
     DrawerLayout drawerLayout;
-    String bulbKey, tvKey, fridgeKey, acKey, soilKey, deviceKey;
+    String bulbKey, tvKey, fridgeKey, acKey, soilKey, deviceKey, deviceActualValue, bulbValue;
     ArrayList<Device> devices;
+    private String tvValue, fridgeValue,soilValue,acValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,32 +94,40 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             switch(drawableId){
                 case R.drawable.lightbulb:
                     deviceKey = bulbKey;
+                    deviceActualValue = bulbValue;
                     Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
                     intent=new Intent(HomeActivity.this,LightBulbActivity.class);
                     intent.putExtra("user", username);
                     intent.putExtra("deviceKey", deviceKey);
+                    intent.putExtra("deviceActualValue", deviceActualValue);
                     startActivity(intent);
                     break;
                 case R.drawable.tv:
+                    deviceActualValue = tvValue;
                     Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
                     break;
                 case R.drawable.ac:
                     deviceKey = acKey;
+                    deviceActualValue = acValue;
                     Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
                     intent=new Intent(HomeActivity.this,ACActivity.class);
                     intent.putExtra("user", username);
                     intent.putExtra("deviceKey", deviceKey);
+                    intent.putExtra("deviceActualValue", deviceActualValue);
                     startActivity(intent);
                     break;
                 case R.drawable.fridge:
+                    deviceActualValue = fridgeValue;
                     Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
                     break;
                 case R.drawable.soil_moisture:
                     deviceKey = soilKey;
+                    deviceActualValue = soilValue;
                     Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
                     intent=new Intent(HomeActivity.this,SoilMoistureActivity.class);
                     intent.putExtra("user", username);
                     intent.putExtra("deviceKey", deviceKey);
+                    intent.putExtra("deviceActualValue", deviceActualValue);
                     startActivity(intent);
                     break;
                 case R.drawable.add:
@@ -188,26 +198,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String deviceName = myDevice.getDeviceName();
         switch(deviceName){
             case "Bulb":
+                bulbValue = myDevice.getActualValue();
                 bulbKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.lightbulb);
                 im.setTag(R.drawable.lightbulb);
                 break;
             case "TV":
+                tvValue = myDevice.getActualValue();
                 tvKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.tv);
                 im.setTag(R.drawable.tv);
                 break;
             case "Fridge":
+                fridgeValue = myDevice.getActualValue();
                 fridgeKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.fridge);
                 im.setTag(R.drawable.fridge);
                 break;
             case "AC":
+                acValue= myDevice.getActualValue();
                 acKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.ac);
                 im.setTag(R.drawable.ac);
                 break;
             case "Soil Moisture":
+                soilValue = myDevice.getActualValue();
                 soilKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.soil_moisture);
                 im.setTag(R.drawable.soil_moisture);

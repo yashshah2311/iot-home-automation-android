@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ public class ACActivity extends AppCompatActivity  {
     LabeledSwitch aSwitch;
     String username, deviceKey;
     DatabaseReference acRef;
+    String deviceActualValue;
+    LinearLayout llTemperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,24 +35,32 @@ public class ACActivity extends AppCompatActivity  {
     }
 
     private void initialize() {
+        llTemperature = findViewById(R.id.llTemperature);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         Intent intent = getIntent();
         username = intent.getStringExtra("user");
         deviceKey = intent.getStringExtra("deviceKey");
+        deviceActualValue = intent.getStringExtra("deviceActualValue");
         acRef = db.getReference("users").child(username).child("devicesList").child(deviceKey).child("actualValue");
-        Toast.makeText(this, "This is "+ acRef, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "This is "+ acRef, Toast.LENGTH_SHORT).show();
+
         aSwitch=findViewById(R.id.switchAC);
+        if(deviceActualValue.equals("ON")){
+            aSwitch.setOn(true);
+            llTemperature.setVisibility(View.VISIBLE);
+        }else{
+            aSwitch.setOn(false);
+            llTemperature.setVisibility(View.GONE);
+        }
 
         aSwitch.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
                 if(isOn == false){
                     acRef.setValue("OFF");
-                    aSwitch.setOn(false);
                 }else {
                     acRef.setValue("ON");
-                    aSwitch.setOn(true);
                 }
             }
         });
