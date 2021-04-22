@@ -8,8 +8,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,6 +36,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout lin1, lin2;
     ImageView btnAdd;
     String username;
+    Button btnConnect;
     DatabaseReference  usersTable, userDevice;
     DrawerLayout drawerLayout;
 
@@ -49,6 +52,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lvMenu = findViewById(R.id.lvMenu);
         lvMenu.setOnItemClickListener(this);
         drawerLayout = findViewById(R.id.drawer_layout);
+        btnConnect = findViewById(R.id.btnAddConnection);
+        btnConnect.setOnClickListener(this);
         listOfMenu = new ArrayList<String>();
         listOfMenu.add("Home");
         listOfMenu.add("Logout");
@@ -65,9 +70,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         devices = new ArrayList<Device>();
 
-        findDevices();
-        addPlusButton();
-
 
 
 
@@ -77,32 +79,40 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
-        int drawableId = (Integer)v.getTag();
-        switch(drawableId){
-            case R.drawable.lightbulb:
-                Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
-                intent.putExtra("user", username);
-                startActivity(intent);
-                break;
-            case R.drawable.tv:
-                Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
-                break;
-            case R.drawable.ac:
-                Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
-                break;
-            case R.drawable.fridge:
-                Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
-                break;
-            case R.drawable.soil_moisture:
-                Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
-                break;
-            case R.drawable.add:
-                Intent intentAdd=new Intent(HomeActivity.this,AddDeviceActivity.class);
-                intentAdd.putExtra("user", username);
-                startActivity(intentAdd);
-                break;
+        if(v.getId() == R.id.btnAddConnection){
+            ViewGroup layout = (ViewGroup) btnConnect.getParent();
+            if(layout != null)
+                layout.removeView(btnConnect);
+            findDevices();
+            addPlusButton();
+        }
+        else{
+            int drawableId = (Integer)v.getTag();
+            switch(drawableId){
+                case R.drawable.lightbulb:
+                    Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
+                    intent.putExtra("user", username);
+                    startActivity(intent);
+                    break;
+                case R.drawable.tv:
+                    Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
+                    break;
+                case R.drawable.ac:
+                    Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
+                    break;
+                case R.drawable.fridge:
+                    Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
+                    break;
+                case R.drawable.soil_moisture:
+                    Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
+                    break;
+                case R.drawable.add:
+                    Intent intentAdd=new Intent(HomeActivity.this,AddDeviceActivity.class);
+                    intentAdd.putExtra("user", username);
+                    startActivity(intentAdd);
+                    break;
+            }
         }
 
     }
