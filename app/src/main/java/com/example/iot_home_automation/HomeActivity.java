@@ -99,7 +99,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     break;
                 case R.drawable.tv:
+                    deviceKey = tvKey;
                     Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
+                    intent=new Intent(HomeActivity.this,TvActivity.class);
+                    intent.putExtra("user", username);
+                    intent.putExtra("deviceKey", deviceKey);
+                    startActivity(intent);
                     break;
                 case R.drawable.ac:
                     deviceKey = acKey;
@@ -110,7 +115,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     break;
                 case R.drawable.fridge:
+                    deviceKey = fridgeKey;
                     Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
+                    intent=new Intent(HomeActivity.this,FridgeActivity.class);
+                    intent.putExtra("user", username);
+                    intent.putExtra("deviceKey", deviceKey);
+                    startActivity(intent);
                     break;
                 case R.drawable.soil_moisture:
                     deviceKey = soilKey;
