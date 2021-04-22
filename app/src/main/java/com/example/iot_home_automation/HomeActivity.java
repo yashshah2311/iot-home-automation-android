@@ -36,8 +36,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     String username;
     DatabaseReference  usersTable, userDevice;
     DrawerLayout drawerLayout;
-
-    List<Device> devices;
+    String bulbKey, tvKey, fridgeKey, acKey, soilKey, deviceKey;
+    ArrayList<Device> devices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,18 +81,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int drawableId = (Integer)v.getTag();
         switch(drawableId){
             case R.drawable.lightbulb:
-                Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
-                intent.putExtra("user", username);
-                startActivity(intent);
-                break;
+
+                deviceKey = bulbKey;
+                Toast.makeText(this, "The Bulb was called successfully ----" + deviceKey, Toast.LENGTH_LONG).show();
+//                Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
+//                intent.putExtra("user", username);
+//                intent.putExtra("deviceKey", deviceKey);
+//                startActivity(intent);
+//                break;
             case R.drawable.tv:
+                deviceKey = tvKey;
+                Toast.makeText(this, "The Bulb was called successfully ----" + deviceKey, Toast.LENGTH_LONG).show();
                 Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.ac:
+                deviceKey = acKey;
+                Toast.makeText(this, "The Bulb was called successfully ----" + deviceKey, Toast.LENGTH_LONG).show();
                 Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.fridge:
+                deviceKey = fridgeKey;
                 Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.soil_moisture:
@@ -163,12 +171,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         im.setPadding(15, 15, 15, 15);
 
         String deviceName = myDevice.getDeviceName();
+        //        if(device.getDeviceName() == "Bulb"){
+
+//        } else if(device.getDeviceName() == "TV"){
+//
+
+//        } else if(device.getDeviceName() == "AC"){
+//            acKey = String.valueOf(devices.size()-1);
+//            Toast.makeText(this, "bulbKeybulbKeybulbKeybulbKey " + devices.size() , Toast.LENGTH_LONG).show();
+//        } else if(device.getDeviceName() == "Fridge"){
+//            fridgeKey = String.valueOf(devices.size()-1);
+//            Toast.makeText(this, "bulbKeybulbKeybulbKeybulbKey " + devices.size() , Toast.LENGTH_LONG).show();
+//        } else if(device.getDeviceName() == "Soil Moisture"){
+//            soilKey = String.valueOf(devices.size());
+//            Toast.makeText(this, "bulbKeybulbKeybulbKeybulbKey " + devices.size() , Toast.LENGTH_LONG).show();
+//        }
         switch(deviceName){
             case "Bulb":
+                bulbKey = String.valueOf(devices.size() - 1);
+                Toast.makeText(this, "bulbKeybulbKeybulbKeybulbKey " + (devices.size() - 1) , Toast.LENGTH_LONG).show();
                 im.setImageResource(R.drawable.lightbulb);
                 im.setTag(R.drawable.lightbulb);
                 break;
             case "TV":
+                tvKey = String.valueOf(devices.size()-1);
+                Toast.makeText(this, "bulbKeybulbKeybulbKeybulbKey " + (devices.size() - 1) , Toast.LENGTH_LONG).show();
                 im.setImageResource(R.drawable.tv);
                 im.setTag(R.drawable.tv);
                 break;
@@ -177,6 +204,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 im.setTag(R.drawable.fridge);
                 break;
             case "AC":
+                acKey = String.valueOf(devices.size()-1);
+                Toast.makeText(this, "bulbKeybulbKeybulbKeybulbKey " + (devices.size() - 1) , Toast.LENGTH_LONG).show();
                 im.setImageResource(R.drawable.ac);
                 im.setTag(R.drawable.ac);
                 break;

@@ -34,24 +34,24 @@ public class LightBulbActivity extends AppCompatActivity {
         bulbRef = db.getReference("users").child(username).child("devicesList").child(deviceKey).child("actualValue");
         Toast.makeText(this, "This is "+ bulbRef, Toast.LENGTH_SHORT).show();
 
-        Button btnOn = findViewById(R.id.btnOn);
-        Button btnOff = findViewById(R.id.btnOff);
+//        Button btnOn = findViewById(R.id.btnOn);
+//        Button btnOff = findViewById(R.id.btnOff);
 
-        btnOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bulbRef.setValue("ON");
-                Toast.makeText(LightBulbActivity.this,"Device is ON", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bulbRef.setValue("OFF");
-                Toast.makeText(LightBulbActivity.this,"Device is OFF", Toast.LENGTH_LONG).show();
-            }
-        });
+//        btnOn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                bulbRef.setValue("ON");
+//                Toast.makeText(LightBulbActivity.this,"Device is ON", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        btnOff.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                bulbRef.setValue("OFF");
+//                Toast.makeText(LightBulbActivity.this,"Device is OFF", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
     }
 

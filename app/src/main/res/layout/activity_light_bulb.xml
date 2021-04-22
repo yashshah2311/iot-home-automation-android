@@ -43,7 +43,7 @@
         android:orientation="horizontal">
 
         <com.github.angads25.toggle.widget.LabeledSwitch
-            android:id="@+id/switchAC"
+            android:id="@+id/switchBulb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -62,32 +62,6 @@
         android:layout_weight="4"
         android:orientation="horizontal"
         android:gravity="center">
-        <Button
-            android:id="@+id/btnDecrease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="decreaseInteger"
-            android:text="-"
-            android:textSize="25sp"/>
-        <TextView
-            android:id="@+id/tvTemperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="16dp"
-            android:text="0"
-            android:textSize="70sp"
-            android:textStyle="bold" />
-        <Button
-            android:id="@+id/btnIncrease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="increaseInteger"
-            android:text="+"
-            android:textSize="25sp"/>
-
     </LinearLayout>
 
 </LinearLayout>
