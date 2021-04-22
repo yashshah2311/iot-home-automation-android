@@ -8,8 +8,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,10 +36,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout lin1, lin2;
     ImageView btnAdd;
     String username;
+    Button btnConnect;
     DatabaseReference  usersTable, userDevice;
     DrawerLayout drawerLayout;
-
-    List<Device> devices;
+    String bulbKey, tvKey, fridgeKey, acKey, soilKey, deviceKey;
+    ArrayList<Device> devices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lvMenu = findViewById(R.id.lvMenu);
         lvMenu.setOnItemClickListener(this);
         drawerLayout = findViewById(R.id.drawer_layout);
+        btnConnect = findViewById(R.id.btnAddConnection);
+        btnConnect.setOnClickListener(this);
         listOfMenu = new ArrayList<String>();
         listOfMenu.add("Home");
         listOfMenu.add("Logout");
@@ -65,9 +70,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         devices = new ArrayList<Device>();
 
-        findDevices();
-        addPlusButton();
-
 
 
 
@@ -77,39 +79,53 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
-        int drawableId = (Integer)v.getTag();
-        Intent intent;
-        switch(drawableId){
-            case R.drawable.lightbulb:
-                Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
-                intent=new Intent(HomeActivity.this,LightBulbActivity.class);
-                intent.putExtra("user", username);
-                startActivity(intent);
-                break;
-            case R.drawable.tv:
-                Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
-                break;
-            case R.drawable.ac:
-                Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
-                intent=new Intent(HomeActivity.this,ACActivity.class);
-                intent.putExtra("user", username);
-                startActivity(intent);
-                break;
-            case R.drawable.fridge:
-                Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
-                break;
-            case R.drawable.soil_moisture:
-                Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
-                intent=new Intent(HomeActivity.this,SoilMoistureActivity.class);
-                intent.putExtra("user", username);
-                startActivity(intent);
-                break;
-            case R.drawable.add:
-                Intent intentAdd=new Intent(HomeActivity.this,AddDeviceActivity.class);
-                intentAdd.putExtra("user", username);
-                startActivity(intentAdd);
-                break;
+        if(v.getId() == R.id.btnAddConnection){
+            ViewGroup layout = (ViewGroup) btnConnect.getParent();
+            if(layout != null)
+                layout.removeView(btnConnect);
+            findDevices();
+            addPlusButton();
+        }
+        else{
+            int drawableId = (Integer)v.getTag();
+            Intent intent;
+            switch(drawableId){
+                case R.drawable.lightbulb:
+                    deviceKey = bulbKey;
+                    Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
+                    intent=new Intent(HomeActivity.this,LightBulbActivity.class);
+                    intent.putExtra("user", username);
+                    intent.putExtra("deviceKey", deviceKey);
+                    startActivity(intent);
+                    break;
+                case R.drawable.tv:
+                    Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
+                    break;
+                case R.drawable.ac:
+                    deviceKey = acKey;
+                    Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
+                    intent=new Intent(HomeActivity.this,ACActivity.class);
+                    intent.putExtra("user", username);
+                    intent.putExtra("deviceKey", deviceKey);
+                    startActivity(intent);
+                    break;
+                case R.drawable.fridge:
+                    Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
+                    break;
+                case R.drawable.soil_moisture:
+                    deviceKey = soilKey;
+                    Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
+                    intent=new Intent(HomeActivity.this,SoilMoistureActivity.class);
+                    intent.putExtra("user", username);
+                    intent.putExtra("deviceKey", deviceKey);
+                    startActivity(intent);
+                    break;
+                case R.drawable.add:
+                    Intent intentAdd=new Intent(HomeActivity.this,AddDeviceActivity.class);
+                    intentAdd.putExtra("user", username);
+                    startActivity(intentAdd);
+                    break;
+            }
         }
 
     }
@@ -172,22 +188,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String deviceName = myDevice.getDeviceName();
         switch(deviceName){
             case "Bulb":
+                bulbKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.lightbulb);
                 im.setTag(R.drawable.lightbulb);
                 break;
             case "TV":
+                tvKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.tv);
                 im.setTag(R.drawable.tv);
                 break;
             case "Fridge":
+                fridgeKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.fridge);
                 im.setTag(R.drawable.fridge);
                 break;
             case "AC":
+                acKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.ac);
                 im.setTag(R.drawable.ac);
                 break;
             case "Soil Moisture":
+                soilKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.soil_moisture);
                 im.setTag(R.drawable.soil_moisture);
                 break;
