@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.github.angads25.toggle.model.ToggleableView;
 import com.github.angads25.toggle.widget.LabeledSwitch;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,13 +64,17 @@ public class LightBulbActivity extends AppCompatActivity {
                 public void onSwitched(ToggleableView toggleableView, boolean isOn) {
                     if(isOn == false){
                         bulbRef.setValue("OFF");
+
                     }else {
                         bulbRef.setValue("ON");
                     }
                 }
             });
+            Toast.makeText(this, "Out", Toast.LENGTH_LONG).show();
+
 
         }catch (Exception e){
+
             Log.d("Error",e.getMessage());
         }
 
