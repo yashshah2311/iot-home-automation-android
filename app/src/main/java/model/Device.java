@@ -6,6 +6,8 @@ public class Device {
     private String defaultValue;
     private String actualValue;
 
+
+
     public Device() {
     }
 

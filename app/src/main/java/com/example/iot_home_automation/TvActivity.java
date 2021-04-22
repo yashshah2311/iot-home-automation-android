@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ public class TvActivity extends AppCompatActivity {
     LabeledSwitch aSwitch;
     String username, deviceKey;
     DatabaseReference TvRef;
+    String deviceActualValue;
+    LinearLayout llTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +39,25 @@ public class TvActivity extends AppCompatActivity {
     }
 
     private void initialize() {
+        try {
+        llTv = findViewById(R.id.llTv);
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         Intent intent = getIntent();
         username = intent.getStringExtra("user");
         deviceKey = intent.getStringExtra("deviceKey");
+        deviceActualValue = intent.getStringExtra("deviceActualValue");
         TvRef = db.getReference("users").child(username).child("devicesList").child(deviceKey).child("actualValue");
-        Toast.makeText(this, "This is "+ TvRef, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "This is "+ TvRef, Toast.LENGTH_SHORT).show();
         aSwitch=findViewById(R.id.switchTv);
+        if(deviceActualValue.equals("ON")){
+            aSwitch.setOn(true);
+            llTv.setVisibility(View.VISIBLE);
+        }else{
+            aSwitch.setOn(false);
+            llTv.setVisibility(View.GONE);
+        }
         aSwitch.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
@@ -100,6 +115,13 @@ public class TvActivity extends AppCompatActivity {
         });
         tvValueChannel = findViewById(R.id.tvValueChannel);
         valueChannel = Integer.valueOf(tvValueChannel.getText().toString());
+
+        }catch (Exception e){
+
+            Log.d("Error",e.getMessage());
+        }
+
+
 
 
     }

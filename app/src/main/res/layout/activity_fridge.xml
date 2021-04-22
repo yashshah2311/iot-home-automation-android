@@ -10,7 +10,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
-    tools:context=".HomeActivity">
+    tools:context=".FridgeActivity">
 
 
 
@@ -67,125 +67,114 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llFridge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="3"
-        android:orientation="vertical"
-        android:gravity="center">
-
-
-        <TextView
-            android:id="@+id/tvTitleFridge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fridge"
-            android:textColor="#112233"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:gravity="center"
-            android:layout_weight="1.5"
+            android:orientation="vertical">
 
-            >
-
-            <Button
-                android:id="@+id/btnDecreaseFridge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:textSize="25sp"
-                />
 
             <TextView
-                android:id="@+id/tvValueFridge"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTitleFridge"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="6"
-                android:textSize="50sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Fridge"
+                android:textColor="#112233"
+                android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/btnIncreaseFridge"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+"
-                android:textSize="25sp"
-                />
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:orientation="horizontal"
+
+                >
+
+                <Button
+                    android:id="@+id/btnDecreaseFridge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvValueFridge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="6"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnIncreaseFridge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="25sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="vertical"
-        android:gravity="center">
-
-
-        <TextView
-            android:id="@+id/tvTitleFreezer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Freezer"
-            android:textColor="#112233"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:gravity="center"
-            android:layout_weight="1.5"
-            >
-            <Button
-                android:id="@+id/btnDecreaseFreezer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:textSize="25sp"
-                />
+            android:orientation="vertical">
+
 
             <TextView
-                android:id="@+id/tvValueFreezer"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTitleFreezer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="-5"
-                android:textSize="50sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Freezer"
+                android:textColor="#112233"
+                android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/btnIncreaseFreezer"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+"
-                android:textSize="25sp"
-                />
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDecreaseFreezer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvValueFreezer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="-5"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnIncreaseFreezer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="25sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

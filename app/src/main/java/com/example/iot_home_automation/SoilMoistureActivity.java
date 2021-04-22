@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.xw.repo.BubbleSeekBar;
 
+import java.util.Random;
+
 public class SoilMoistureActivity extends AppCompatActivity {
 
     TextView tvValue;
@@ -27,6 +31,8 @@ public class SoilMoistureActivity extends AppCompatActivity {
     LabeledSwitch aSwitch;
     String username, deviceKey;
     DatabaseReference soilRef;
+    String deviceActualValue;
+    LinearLayout llbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,31 +45,41 @@ public class SoilMoistureActivity extends AppCompatActivity {
     private void initialize() {
 
         try {
+            llbar = findViewById(R.id.llbar);
+            Random random = new Random();
+            int moisture = random.nextInt(10-1)+1;
             FirebaseDatabase db = FirebaseDatabase.getInstance();
 
             Intent intent = getIntent();
             username = intent.getStringExtra("user");
             deviceKey = intent.getStringExtra("deviceKey");
+            deviceActualValue = intent.getStringExtra("deviceActualValue");
             soilRef = db.getReference("users").child(username).child("devicesList").child(deviceKey).child("actualValue");
-            Toast.makeText(this, "This is "+ soilRef, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "This is "+ soilRef, Toast.LENGTH_SHORT).show();
 
             aSwitch = findViewById(R.id.switchSoil);
+            if(deviceActualValue.equals("ON")){
+                aSwitch.setOn(true);
+                llbar.setVisibility(View.VISIBLE);
+            }else{
+                aSwitch.setOn(false);
+                llbar.setVisibility(View.GONE);
+            }
 
             aSwitch.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
                 if(isOn == false){
                     soilRef.setValue("OFF");
-                    aSwitch.setOn(false);
                 }else {
                     soilRef.setValue("ON");
-                    aSwitch.setOn(true);
                 }
             }
             });
 
             tvValue = findViewById(R.id.tvType);
             bubbleSeekBar = findViewById(R.id.seekBar);
+
             bubbleSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
                 @SuppressLint("ResourceAsColor")
                 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -92,6 +108,7 @@ public class SoilMoistureActivity extends AppCompatActivity {
 
                 }
             });
+            bubbleSeekBar.setProgress(moisture);
 
         }catch (Exception e){
             Log.d("Error",e.getMessage());
