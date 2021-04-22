@@ -40,13 +40,16 @@ public class ACActivity extends AppCompatActivity  {
         acRef = db.getReference("users").child(username).child("devicesList").child(deviceKey).child("actualValue");
         Toast.makeText(this, "This is "+ acRef, Toast.LENGTH_SHORT).show();
         aSwitch=findViewById(R.id.switchAC);
+
         aSwitch.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
                 if(isOn == false){
                     acRef.setValue("OFF");
+                    aSwitch.setOn(false);
                 }else {
                     acRef.setValue("ON");
+                    aSwitch.setOn(true);
                 }
             }
         });
