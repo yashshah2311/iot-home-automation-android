@@ -10,7 +10,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
-    tools:context=".HomeActivity">
+    tools:context=".SoilMoistureActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,31 +62,57 @@
             app:colorOn="@color/teal_200"
             app:on="true" />
 
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <com.xw.repo.BubbleSeekBar
+            android:id="@+id/seekBar"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
-            app:bsb_bubble_color="#E4000000"
-            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            android:enabled="false"
+            app:bsb_auto_adjust_section_mark="true"
+            app:bsb_bubble_color="#FFE500"
+            app:bsb_bubble_text_color="#1B5E20"
             app:bsb_max="10"
             app:bsb_min="0"
-            app:bsb_progress="4"
-            app:bsb_second_track_color="@color/ic_launcher_background"
+            app:bsb_progress="9"
+            app:bsb_second_track_color="@color/green"
             app:bsb_section_count="10"
             app:bsb_section_text_position="below_section_mark"
-            app:bsb_show_progress_in_float="false"
+            app:bsb_section_text_size="21sp"
             app:bsb_show_section_mark="true"
             app:bsb_show_section_text="true"
             app:bsb_show_thumb_text="true"
-            app:bsb_track_color="#E4FFC44E"/>
+            app:bsb_thumb_color="@color/black"
+            app:bsb_thumb_text_color="@color/black"
+            app:bsb_track_color="#FF7600" />
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Wet"
+            android:textColor="#AE000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
 
     </LinearLayout>
 
