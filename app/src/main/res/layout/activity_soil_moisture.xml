@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/wall"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="26dp"
+    tools:context=".HomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:orientation="horizontal">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@color/black"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:foregroundGravity="center"
+                android:textSize="38sp"
+                app:title="Soil Moisture"
+                app:titleTextColor="@color/white" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.github.angads25.toggle.widget.LabeledSwitch
+            android:id="@+id/switchSoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:enabled="true"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:textSize="14sp"
+            app:colorBorder="@color/teal_200"
+            app:colorOn="@color/teal_200"
+            app:on="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.xw.repo.BubbleSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bsb_bubble_color="#E4000000"
+            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            app:bsb_max="10"
+            app:bsb_min="0"
+            app:bsb_progress="4"
+            app:bsb_second_track_color="@color/ic_launcher_background"
+            app:bsb_section_count="10"
+            app:bsb_section_text_position="below_section_mark"
+            app:bsb_show_progress_in_float="false"
+            app:bsb_show_section_mark="true"
+            app:bsb_show_section_text="true"
+            app:bsb_show_thumb_text="true"
+            app:bsb_track_color="#E4FFC44E"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

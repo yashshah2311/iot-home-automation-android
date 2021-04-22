@@ -36,8 +36,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     String username;
     DatabaseReference  usersTable, userDevice;
     DrawerLayout drawerLayout;
-
-    List<Device> devices;
+    String bulbKey, tvKey, fridgeKey, acKey, soilKey, deviceKey;
+    ArrayList<Device> devices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,24 +79,37 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         int drawableId = (Integer)v.getTag();
+        Intent intent;
         switch(drawableId){
             case R.drawable.lightbulb:
+                deviceKey = bulbKey;
                 Toast.makeText(this, "The Bulb was called successfully", Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(HomeActivity.this,LightBulbActivity.class);
+                intent=new Intent(HomeActivity.this,LightBulbActivity.class);
                 intent.putExtra("user", username);
+                intent.putExtra("deviceKey", deviceKey);
                 startActivity(intent);
                 break;
             case R.drawable.tv:
                 Toast.makeText(this, "The TV was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.ac:
+                deviceKey = acKey;
                 Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
+                intent=new Intent(HomeActivity.this,ACActivity.class);
+                intent.putExtra("user", username);
+                intent.putExtra("deviceKey", deviceKey);
+                startActivity(intent);
                 break;
             case R.drawable.fridge:
                 Toast.makeText(this, "The fridge was called successfully", Toast.LENGTH_LONG).show();
                 break;
             case R.drawable.soil_moisture:
+                deviceKey = soilKey;
                 Toast.makeText(this, "The soil moisture was called successfully", Toast.LENGTH_LONG).show();
+                intent=new Intent(HomeActivity.this,SoilMoistureActivity.class);
+                intent.putExtra("user", username);
+                intent.putExtra("deviceKey", deviceKey);
+                startActivity(intent);
                 break;
             case R.drawable.add:
                 Intent intentAdd=new Intent(HomeActivity.this,AddDeviceActivity.class);
@@ -165,22 +178,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String deviceName = myDevice.getDeviceName();
         switch(deviceName){
             case "Bulb":
+                bulbKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.lightbulb);
                 im.setTag(R.drawable.lightbulb);
                 break;
             case "TV":
+                tvKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.tv);
                 im.setTag(R.drawable.tv);
                 break;
             case "Fridge":
+                fridgeKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.fridge);
                 im.setTag(R.drawable.fridge);
                 break;
             case "AC":
+                acKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.ac);
                 im.setTag(R.drawable.ac);
                 break;
             case "Soil Moisture":
+                soilKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.soil_moisture);
                 im.setTag(R.drawable.soil_moisture);
                 break;
