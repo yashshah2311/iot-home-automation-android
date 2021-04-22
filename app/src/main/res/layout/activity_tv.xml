@@ -10,7 +10,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
-    tools:context=".HomeActivity">
+    tools:context=".TvActivity">
 
 
 
@@ -67,127 +67,116 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="3"
-        android:orientation="vertical"
-        android:gravity="center">
-
-
-        <TextView
-            android:id="@+id/tvTitleVolume"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Volume"
-            android:textColor="#112233"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:gravity="center"
-            android:layout_weight="1.5"
+            android:orientation="vertical">
 
-            >
-
-            <Button
-                android:id="@+id/btnDecreaseVolume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:textSize="25sp"
-                />
 
             <TextView
-                android:id="@+id/tvValueVolume"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTitleVolume"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="10"
-                android:textSize="50sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Volume"
+                android:textColor="#112233"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnIncreaseVolume"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+"
-                android:textSize="25sp"
-                />
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:orientation="horizontal"
+
+                >
+
+                <Button
+                    android:id="@+id/btnDecreaseVolume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvValueVolume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="10"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnIncreaseVolume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="25sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="vertical"
-        android:gravity="center">
-
-
-        <TextView
-            android:id="@+id/tvTitleChannel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Channels"
-            android:textColor="#112233"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:gravity="center"
-            android:layout_weight="1.5"
-            >
-            <Button
-                android:id="@+id/btnDecreaseChannel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:textSize="25sp"
-                />
+            android:orientation="vertical">
+
 
             <TextView
-                android:id="@+id/tvValueChannel"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTitleChannel"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="6"
-                android:textSize="50sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Channels"
+                android:textColor="#112233"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnIncreaseChannel"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+"
-                android:textSize="25sp"
-                />
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDecreaseChannel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvValueChannel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="6"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnIncreaseChannel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="25sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

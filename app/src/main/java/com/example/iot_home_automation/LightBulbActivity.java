@@ -70,7 +70,6 @@ public class LightBulbActivity extends AppCompatActivity {
                     }
                 }
             });
-            Toast.makeText(this, "Out", Toast.LENGTH_LONG).show();
 
 
         }catch (Exception e){

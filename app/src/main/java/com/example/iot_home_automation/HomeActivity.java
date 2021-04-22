@@ -100,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("user", username);
                     intent.putExtra("deviceKey", deviceKey);
                     intent.putExtra("deviceActualValue", deviceActualValue);
-                    userDevice.removeEventListener(this);
+
                     startActivity(intent);
                     break;
                 case R.drawable.tv:
@@ -110,6 +110,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     intent=new Intent(HomeActivity.this,TvActivity.class);
                     intent.putExtra("user", username);
                     intent.putExtra("deviceKey", deviceKey);
+                    intent.putExtra("deviceActualValue", deviceActualValue);
                     startActivity(intent);
                     break;
                 case R.drawable.ac:
@@ -129,6 +130,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     intent=new Intent(HomeActivity.this,FridgeActivity.class);
                     intent.putExtra("user", username);
                     intent.putExtra("deviceKey", deviceKey);
+                    intent.putExtra("deviceActualValue", deviceActualValue);
                     startActivity(intent);
                     break;
                 case R.drawable.soil_moisture:
@@ -287,7 +289,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case "Logout":
-                Intent intent1=new Intent(HomeActivity.this,LoginActivity.class);
+                Intent intent1=new Intent(HomeActivity.this,MainActivity.class);
                 startActivity(intent1);
                 break;
         }
