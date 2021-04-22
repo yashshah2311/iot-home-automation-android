@@ -103,6 +103,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.drawable.ac:
                     deviceKey = acKey;
+
                     Toast.makeText(this, "The AC was called successfully", Toast.LENGTH_LONG).show();
                     intent=new Intent(HomeActivity.this,ACActivity.class);
                     intent.putExtra("user", username);
@@ -188,22 +189,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String deviceName = myDevice.getDeviceName();
         switch(deviceName){
             case "Bulb":
+                bulbKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.lightbulb);
                 im.setTag(R.drawable.lightbulb);
                 break;
             case "TV":
+                tvKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.tv);
                 im.setTag(R.drawable.tv);
                 break;
             case "Fridge":
+                fridgeKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.fridge);
                 im.setTag(R.drawable.fridge);
                 break;
             case "AC":
+                acKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.ac);
                 im.setTag(R.drawable.ac);
                 break;
             case "Soil Moisture":
+                soilKey = String.valueOf(devices.size() - 1);
                 im.setImageResource(R.drawable.soil_moisture);
                 im.setTag(R.drawable.soil_moisture);
                 break;
